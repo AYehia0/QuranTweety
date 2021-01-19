@@ -1,5 +1,6 @@
 import os
 import twitter
+from ayahat import Ayah
 
 API_KEY = os.environ.get('api_key')
 API_SECRET = os.environ.get('api_secret')
@@ -22,8 +23,8 @@ class TweetQ:
         return api
 
     def tweet_quran(self, message):
-        status = self.twitter_api.PostUpdate(message)
+        self.twitter_api.PostUpdate(message)
+        #print(len(tweet.text))
 
 
-test = TweetQ()
 
