@@ -11,7 +11,7 @@ class Ayah:
     def __init__(self, ayah_num):
 
         self.ayah_number = ayah_num
-        self.q_api = QURAN_API + self.ayah_number
+        self.q_api = QURAN_API + str(self.ayah_number)
 
     def get_ayah(self):
         
