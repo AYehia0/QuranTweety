@@ -25,7 +25,7 @@ def check_size(ayah):
     return True
 
 
-# run the function job() every 5 minutes 
+# run the function job() every X minutes 
 schedule.every(TIME).minutes.do(post_tweets)
 
 try:
