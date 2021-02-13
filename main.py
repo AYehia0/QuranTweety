@@ -5,7 +5,7 @@ import schedule
 
 TWEET_SIZE = 280
 AYAHAT_SIZE = 6236
-TIME = 10
+TIME = 30
 
 def post_tweets():
     in_quran = random.randint(1, AYAHAT_SIZE)
