@@ -1,5 +1,6 @@
 from tweet import TweetQ
 from ayahat import Ayah
+import hadiths
 import random
 import schedule
 
@@ -8,19 +9,41 @@ AYAHAT_SIZE = 6236
 TIME = 10
 
 def post_tweets():
+    """POST a tweet to the twitter API"""
+
+    # random 
+    #chos = random.randint(1, 3)
+    chos = 1
     in_quran = random.randint(1, AYAHAT_SIZE)
-    ayah = Ayah(in_quran).get_ayah()
-    tweet = TweetQ()
+    t = TweetQ()
 
-    if check_size(ayah):
-        print(f"Sending : {len(ayah)} ayah")
-        tweet.tweet_quran(ayah)   
-    else:
-        print("Can't Send (limit exceeded)")
-        return
+    if chos == 1:
+        # checking the ayah length
+        ayah = Ayah(in_quran).get_ayah()
 
-def check_size(ayah):
-    if len(ayah) > 280:
+        if check_size(ayah):
+            print("Posting Ayah")
+            t.tweet(ayah)   
+        else:
+            print("Can't post Ayah, size")
+            return
+
+    if chos == 2:
+        # getting the hadith
+        req_hadith = hadiths.request_hadith()
+        hadith = hadiths.format_hadith()
+
+        # sending hadith
+        if check_size(hadith):
+            print("Posting Hadith")
+            t.tweet(hadith)
+        else:
+            print("Can't post hadith, size")
+            return
+
+
+def check_size(msg):
+    if len(msg) > 280:
         return False
     return True
 
