@@ -6,7 +6,7 @@ import schedule
 
 TWEET_SIZE = 280
 AYAHAT_SIZE = 6236
-TIME = 10
+TIME = 30
 
 def post_tweets():
     """POST a tweet to the twitter API"""
@@ -48,7 +48,7 @@ def check_size(msg):
     return True
 
 
-# run the function job() every 5 minutes 
+# run the function job() every X minutes 
 schedule.every(TIME).minutes.do(post_tweets)
 
 try:
