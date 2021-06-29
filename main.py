@@ -3,47 +3,64 @@ from ayahat import Ayah
 import hadiths
 import random
 import schedule
+import time
 
 TWEET_SIZE = 280
 AYAHAT_SIZE = 6236
-TIME = 30
+TIME = 2
 
 def post_tweets():
     """POST a tweet to the twitter API"""
 
     # random 
-    #chos = random.randint(1, 3)
-    chos = 1
+    chos = random.randint(1, 2)
     in_quran = random.randint(1, AYAHAT_SIZE)
-    t = TweetQ()
 
-    if chos == 1:
-        # checking the ayah length
-        ayah = Ayah(in_quran).get_ayah()
+    res = ensure_get(chos)
+    #print(f"Message: {res} ,Size:{len(res)}")
 
-        if check_size(ayah):
-            print("Posting Ayah")
-            t.tweet(ayah)   
-        else:
-            print("Can't post Ayah, size")
-            return
+    #More Error handling, in case of something went wrong, CASE: res size == 0
+    if res is not None:
+        if len(res) > 0:
+            t = TweetQ()
+            t.tweet(res)
 
-    if chos == 2:
-        # getting the hadith
-        req_hadith = hadiths.request_hadith()
-        hadith = hadiths.format_hadith()
+def ensure_get(search_key):
+    """Ensure getting a valid response, when size exceeds the tweet's size"""
 
-        # sending hadith
-        if check_size(hadith):
-            print("Posting Hadith")
-            t.tweet(hadith)
-        else:
-            print("Can't post hadith, size")
-            return
+    valid_response = False
 
+    while not valid_response:
+
+        #Ayah
+        if search_key == 1:
+            in_quran = random.randint(1, AYAHAT_SIZE)
+            res = Ayah(in_quran).get_ayah()
+
+            if check_size(res):
+                valid_response = True
+        
+        #Hadith
+        if search_key == 2:
+            # getting the hadith
+            req_hadith = hadiths.request_hadith()
+            res = hadiths.format_hadith(req_hadith)
+
+            if res is None:
+                return
+
+            if check_size(res):
+                valid_response = True
+            else:
+                # To avoid too many requests
+                time.sleep(8)
+
+    return res
 
 def check_size(msg):
-    if len(msg) > 280:
+    """Check the size of the tweet"""
+
+    if len(msg) > TWEET_SIZE:
         return False
     return True
 
@@ -55,4 +72,4 @@ try:
     while True:
         schedule.run_pending()
 except Exception as e:
-    print("Done")
+    print(f"Error: {e}")
