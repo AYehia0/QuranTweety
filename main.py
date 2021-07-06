@@ -8,7 +8,7 @@ import time
 TWEET_SIZE = 280
 AYAHAT_SIZE = 6236
 # time in mins : runs every 3h
-TIME = 180 
+TIME = 1 #180 
 
 def post_tweets():
     """POST a tweet to the twitter API"""
