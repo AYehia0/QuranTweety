@@ -1,5 +1,7 @@
 from tweet import TweetQ
 from ayahat import Ayah
+from poems import *
+
 import hadiths
 import random
 import schedule
@@ -8,13 +10,14 @@ import time
 TWEET_SIZE = 280
 AYAHAT_SIZE = 6236
 # time in mins : runs every 3h
-TIME = 180 
+TIME = 180
 
 def post_tweets():
     """POST a tweet to the twitter API"""
 
     # random 
-    chos = random.randint(1, 2)
+    chos = random.randint(1, 3)
+
     in_quran = random.randint(1, AYAHAT_SIZE)
 
     res = ensure_get(chos)
@@ -55,6 +58,15 @@ def ensure_get(search_key):
             else:
                 # To avoid too many requests
                 time.sleep(8)
+
+        if search_key == 3:
+
+            # getting poem
+            res = get_random_lines(5)
+
+            if res:
+                if check_size(str(res)):
+                    valid_response = True
 
     return res
 
