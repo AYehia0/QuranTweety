@@ -13,6 +13,19 @@ The script make use of this awesome api : ```http://api.alquran.cloud/v1/ayah/..
   * ```pip install schedule```
 
 
+# Features 
+
+* Posts quran
+* Posts hadith
+* Generates poetry, special thanks to: [@hayderkharrufa](https://github.com/hayderkharrufa) for his cool vid :D, and ofc [@CodingTrain](https://github.com/CodingTrain).
+
+
+# Resources 
+
+* [Twitter's Api](https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/overview)
+* [Markov Chains](https://www.youtube.com/watch?v=eGFJ8vugIWA)
+
+
 ### ToDo
 * more error handling 
 * save send tweet's info (id, text, ...) for further plans like deleting and other stuff 
