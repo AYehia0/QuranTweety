@@ -13,8 +13,8 @@ class TweetQ:
     def __init__(self):
         self.twitter_api = self.get_api()
 
+
     def get_api(self):
-        """Setup the API keys"""
         api = twitter.Api(consumer_key=API_KEY, 
         consumer_secret=API_SECRET,
         access_token_key=ACCESS_TOKEN,
