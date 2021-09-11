@@ -18,8 +18,6 @@ def post_tweets():
     # random 
     chos = random.randint(1, 3)
 
-    in_quran = random.randint(1, AYAHAT_SIZE)
-
     res = ensure_get(chos)
     #print(f"Message: {res} ,Size:{len(res)}")
 
